@@ -9,7 +9,6 @@ const MealItem = (props) => {
     const {id, name, price} = props
     const addToCartHandler = (amount) => {
         cartCtx.addToCart({ id, name, price, amount })
-        console.log(cartCtx.items)
     }
 
     return (
