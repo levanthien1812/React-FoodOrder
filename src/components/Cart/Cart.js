@@ -1,11 +1,17 @@
 import Modal from '../UI/Modal'
 import classes from './Cart.module.css'
 import CartContext from '../../store/CartContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import CartItem from './CartItem'
+import Checkout from './Checkout'
 
 const Cart = () => {
     const cartCtx = useContext(CartContext)
+    const [isCheckout, setIsCheckout] = useState(false)
+
+    const orderHandler = () => {
+        setIsCheckout(!isCheckout)
+    }
 
     const cartItems = <ul className={classes['cart-items']}>
         {cartCtx.items.map(
@@ -37,10 +43,13 @@ const Cart = () => {
             <span>Total Amount</span>
             <span>${ cartCtx.totalAmount.toFixed(2) }</span>
         </div>
-        <div className={classes.actions}>
-            <button className={classes['button-alt']} onClick={cartCtx.onHideCart}>Close</button>
-            <button className={classes['button']}>Order</button>
-        </div>
+        {isCheckout && <Checkout />}
+        {!isCheckout &&
+            <div className={classes.actions}>
+                <button className={classes['button-alt']} onClick={cartCtx.onHideCart}>Close</button>
+                <button className={classes['button']} onClick={orderHandler}>Order</button>
+            </div>
+        }
     </Modal>
 }
 

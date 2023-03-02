@@ -33,6 +33,19 @@ const AvailableMeals = () => {
         fetchMeals(requestConfig, transformData)
     }, [fetchMeals])
 
+    if (isLoading) {
+        return (
+            <section className={classes.loading}>
+                <p>LOADING...</p>
+            </section>
+        )
+    }
+
+    if (error) {
+        return <section className={classes.error}>
+                <p>Something went wrong</p>
+            </section>
+    }
 
     const mealsList = meals.map(meal => {
         return <MealItem
@@ -43,8 +56,8 @@ const AvailableMeals = () => {
             price={meal.price}/>
     })
 
+
     return <section className={classes.meals}>
-        {isLoading && <p>Loading...</p>}
         <Card>
             <ul>
                 {mealsList}
