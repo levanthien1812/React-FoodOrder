@@ -15,11 +15,15 @@
   margin: 1rem 0;
 }
 
+.cart-empty-message {
+  font-size: 20px;
+}
+
 .actions {
   text-align: right;
 }
 
-.actions button {
+.actions button, .close-btn {
   font: inherit;
   cursor: pointer;
   background-color: transparent;
@@ -30,7 +34,9 @@
 }
 
 .actions button:hover,
-.actions button:active {
+.actions button:active,
+.close-btn:hover,
+.close-btn:active {
   background-color: #5a1a01;
   border-color: #5a1a01;
   color: white;
@@ -43,4 +49,11 @@
 .actions .button {
   background-color: #8a2b06;
   color: white;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
