@@ -1,20 +1,22 @@
 import CartIcon from "../Cart/CartIcon"
 import classes from './HeaderCartButton.module.css'
-import { useContext, useEffect, useState } from "react"
-import CartContext from "../../store/CartContext"
+import { useEffect, useState } from "react"
+import { cartActions } from "../../store/cart"
+import { useSelector, useDispatch } from "react-redux"
 
 const HeaderCartButton = () => {
-    const cartCtx = useContext(CartContext)
+    const dispatch = useDispatch()
+    const items = useSelector(state => state.cart.items)
+    const totalAmount = useSelector(state => state.cart.totalAmount)
 
-    const numberOfCartItems = cartCtx.items.reduce((currentNum, item) => {
+    const numberOfCartItems = items.reduce((currentNum, item) => {
         return currentNum + item.amount
     }, 0)
 
     const [btnIsBump, setBtnIsBump] = useState(false)
 
-    const btnClasses = `${classes.button} ${btnIsBump? classes.bump : ''}`
+    const btnClasses = `${classes.button} ${btnIsBump ? classes.bump : ''}`
 
-    const { totalAmount } = cartCtx
     useEffect(() => {
         setBtnIsBump(true)
 
@@ -27,7 +29,13 @@ const HeaderCartButton = () => {
         }
     }, [totalAmount])
 
-    return <button className={btnClasses} onClick={cartCtx.onShowCart}>
+    const showCartHandler = () => {
+        dispatch(cartActions.showCart({
+            isShown: true
+        }))
+    }
+
+    return <button className={btnClasses} onClick={showCartHandler}>
         <span className={classes.icon}>
             <CartIcon></CartIcon>
         </span>

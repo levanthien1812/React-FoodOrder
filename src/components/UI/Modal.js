@@ -1,7 +1,7 @@
 import classes from './Modal.module.css'
 import ReactDOM from 'react-dom'
-import CartContext from '../../store/CartContext'
-import { useContext } from 'react'
+import { cartActions } from '../../store/cart'
+import { useDispatch } from 'react-redux'
 
 const Backdrop = props => {
     return <div onClick={props.onClick} className={classes.backdrop}></div>
@@ -14,9 +14,16 @@ const ModalOverlay = (props) => {
 }
 
 const Modal = (props) => {
-    const cartCtx = useContext(CartContext)
+    const dispatch = useDispatch()
+
+    const hideCartHandler = () => {
+        dispatch(cartActions.showCart({
+            isShown: false
+        }))
+    }
+    
     return <>
-        {ReactDOM.createPortal(<Backdrop onClick={ cartCtx.onHideCart } />, document.getElementById('overlays'))}
+        {ReactDOM.createPortal(<Backdrop onClick={ hideCartHandler } />, document.getElementById('overlays'))}
         {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>,
             document.getElementById('overlays')
         )}

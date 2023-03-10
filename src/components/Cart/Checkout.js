@@ -1,11 +1,11 @@
 import classes from './Checkout.module.css'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import CartContext from '../../store/CartContext'
-import { useContext } from 'react'
+import { cartActions } from '../../store/cart'
+import { useDispatch } from 'react-redux'
 
 const Checkout = props => {
-    const cartCtx = useContext(CartContext)
+    const dispatch = useDispatch()
 
     return <Formik
         initialValues={{
@@ -53,7 +53,7 @@ const Checkout = props => {
                 </div>
 
                 <div className={classes.actions}>
-                    <button type='button' onClick={cartCtx.onHideCart}>Cancel</button>
+                    <button type='button' onClick={dispatch(cartActions.showCart({isShown: false}))}>Cancel</button>
                     <button type='submit'>Confirm</button>
                 </div>
             

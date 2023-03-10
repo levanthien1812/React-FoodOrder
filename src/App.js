@@ -1,16 +1,16 @@
-import { useContext } from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
-import CartContext from "./store/CartContext";
+import { useSelector } from "react-redux";
 
 function App() {
-  const cartCtx = useContext(CartContext)
+  const isShown = useSelector(state => state.cart.isShown)
+  console.log(isShown)
 
   return (
     <>
       <Header></Header>
-      {cartCtx.isShown && <Cart/>}
+      {isShown && <Cart/>}
       <main>
         <Meals></Meals>
       </main>

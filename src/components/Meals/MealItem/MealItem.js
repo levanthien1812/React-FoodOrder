@@ -1,14 +1,14 @@
 import classes from './MealItem.module.css'
 import MealItemForm from './MealItemForm'
-import CartContext from '../../../store/CartContext'
-import { useContext } from 'react'
+import { useDispatch } from 'react-redux'
+import { cartActions } from '../../../store/cart'
 
 const MealItem = (props) => {
-    const cartCtx = useContext(CartContext)
+    const dispatch = useDispatch()
 
     const {id, name, price} = props
     const addToCartHandler = (amount) => {
-        cartCtx.addToCart({ id, name, price, amount })
+        dispatch(cartActions.addCartItem({ id, name, price, amount }))
     }
 
     return (
