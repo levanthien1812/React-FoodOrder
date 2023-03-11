@@ -11,7 +11,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         showCart(state, action) {
-            state.isShown = action.payload.isShown
+            state.isShown = action.payload
         },
         addCartItem(state, action) {
             state.totalAmount += action.payload.price * action.payload.amount
@@ -33,7 +33,7 @@ const cartSlice = createSlice({
         },
         removeCartItem(state, action) {
             const existingItemIndex = state.items.findIndex(
-                item => item.id === action.payload.id
+                item => item.id === action.payload
             )
             const existingItem = state.items[existingItemIndex]
 
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
                 }
                 state.items[existingItemIndex] = updatedItem
             } else {
-                state.items.filter(item => item.id !== action.payload.id)
+                state.items = state.items.filter(item => item.id !== action.payload)
             }
 
             state.totalAmount -= existingItem.price

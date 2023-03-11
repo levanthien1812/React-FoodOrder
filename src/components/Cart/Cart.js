@@ -15,11 +15,7 @@ const Cart = () => {
     const [doneSubmit, setDoneSubmit] = useState(false)
 
     const orderHandler = () => {
-        if (cart.items.length === 0) {
-            setIsCheckout(false)
-        } else {
-            setIsCheckout(!isCheckout)
-        }
+        setIsCheckout(cart.items.length !== 0)
     }
 
     const checkoutConfirmHandler = async values => {
@@ -38,15 +34,19 @@ const Cart = () => {
         }
     }
 
+    const hideCart = () => {
+        dispatch(cartActions.showCart(false))
+    }
+
     const cartItems = <ul className={classes['cart-items']}>
         {cart.items.map(
             item => {
                 const removeHandler = (id) => {
-                    cartActions.removeCartItem(id)
+                    dispatch(cartActions.removeCartItem(id))
                 }
 
                 const addHandler = (item) => {
-                    dispatch(cartActions.addToCart({ ...item, amount: 1 }))
+                    dispatch(cartActions.addCartItem({ ...item, amount: 1 }))
                 }
 
                 return <CartItem
@@ -79,7 +79,7 @@ const Cart = () => {
                 </div>}
                 {!isCheckout &&
                     <div className={classes.actions}>
-                        <button className={classes['button-alt']} onClick={dispatch(cartActions.showCart.bind({isShown: false}))}> Close </button>
+                        <button className={classes['button-alt']} onClick={hideCart}> Close </button>
                         <button className={classes['button']} onClick={orderHandler}>Order</button>
                     </div>
                 }

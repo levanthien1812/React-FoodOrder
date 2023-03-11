@@ -7,6 +7,10 @@ import { useDispatch } from 'react-redux'
 const Checkout = props => {
     const dispatch = useDispatch()
 
+    const hideCart = () => {
+        dispatch(cartActions.showCart(false))
+    }
+
     return <Formik
         initialValues={{
             name: '',
@@ -53,7 +57,7 @@ const Checkout = props => {
                 </div>
 
                 <div className={classes.actions}>
-                    <button type='button' onClick={dispatch(cartActions.showCart({isShown: false}))}>Cancel</button>
+                    <button type='button' onClick={hideCart}>Cancel</button>
                     <button type='submit'>Confirm</button>
                 </div>
             

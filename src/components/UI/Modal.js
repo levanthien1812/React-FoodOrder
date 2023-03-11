@@ -17,9 +17,7 @@ const Modal = (props) => {
     const dispatch = useDispatch()
 
     const hideCartHandler = () => {
-        dispatch(cartActions.showCart({
-            isShown: false
-        }))
+        dispatch(cartActions.showCart(false))
     }
     
     return <>

@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 function App() {
   const isShown = useSelector(state => state.cart.isShown)
-  console.log(isShown)
 
   return (
     <>
