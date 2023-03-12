@@ -1,7 +1,7 @@
 import CartIcon from "../Cart/CartIcon"
 import classes from './HeaderCartButton.module.css'
 import { useEffect, useState } from "react"
-import { cartActions } from "../../store/cart"
+import { uiActions } from "../../store/ui"
 import { useSelector, useDispatch } from "react-redux"
 
 const HeaderCartButton = () => {
@@ -30,9 +30,7 @@ const HeaderCartButton = () => {
     }, [totalAmount])
 
     const showCartHandler = () => {
-        dispatch(cartActions.showCart({
-            isShown: true
-        }))
+        dispatch(uiActions.setCartVisibility(true))
     }
 
     return <button className={btnClasses} onClick={showCartHandler}>

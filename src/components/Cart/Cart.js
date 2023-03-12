@@ -5,6 +5,7 @@ import CartItem from './CartItem'
 import Checkout from './Checkout'
 import { HashLoader } from 'react-spinners'
 import { cartActions } from '../../store/cart'
+import { uiActions } from '../../store/ui'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Cart = () => {
@@ -35,7 +36,7 @@ const Cart = () => {
     }
 
     const hideCart = () => {
-        dispatch(cartActions.showCart(false))
+        dispatch(uiActions.setCartVisibility(false))
     }
 
     const cartItems = <ul className={classes['cart-items']}>

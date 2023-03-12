@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isShown: false,
     items: [],
     totalAmount: 0,
 }
@@ -10,9 +9,6 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        showCart(state, action) {
-            state.isShown = action.payload
-        },
         addCartItem(state, action) {
             state.totalAmount += action.payload.price * action.payload.amount
 

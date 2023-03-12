@@ -1,14 +1,14 @@
 import classes from './Checkout.module.css'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { cartActions } from '../../store/cart'
 import { useDispatch } from 'react-redux'
+import { uiActions } from '../../store/ui'
 
 const Checkout = props => {
     const dispatch = useDispatch()
 
     const hideCart = () => {
-        dispatch(cartActions.showCart(false))
+        dispatch(uiActions.setCartVisibility(false))
     }
 
     return <Formik

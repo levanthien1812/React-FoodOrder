@@ -1,6 +1,6 @@
 import classes from './Modal.module.css'
 import ReactDOM from 'react-dom'
-import { cartActions } from '../../store/cart'
+import { uiActions } from '../../store/ui'
 import { useDispatch } from 'react-redux'
 
 const Backdrop = props => {
@@ -17,7 +17,7 @@ const Modal = (props) => {
     const dispatch = useDispatch()
 
     const hideCartHandler = () => {
-        dispatch(cartActions.showCart(false))
+        dispatch(uiActions.setCartVisibility(false))
     }
     
     return <>
